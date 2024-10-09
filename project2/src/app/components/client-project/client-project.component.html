@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-success">
+                Client List
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Client Name</th>
+                                    <th>Project Name</th>
+                                    <th>Employee Name</th>
+                                    <th>Employee Designation</th>
+                                    <th>start Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let item of projectList(); let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ item.clientName }}</td>
+                                    <td>{{ item.projectName }}</td>
+                                    <td>{{ item.empName }}</td>
+                                    <td>{{ item.empDesignation }}</td>
+                                    <td>{{ item.startDate }}</td>
+                                    <td>
+                                        <button class="btn btn-primary">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-success">
+                New Client
+            </div>
+            <div class="card-body">
+                <form [formGroup]="projectForm">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="projectName">Project Name</label>
+                            <input type="text" formControlName="projectName" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" formControlName="startDate" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="expectedEndDate">Expected End Date</label>
+                            <input type="date" formControlName="expectedEndDate" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="contactPerson">Contact Name</label>
+                            <input type="text" formControlName="contactPerson" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="contactPersonContactNo">Contact Mobile</label>
+                            <input type="text" formControlName="contactPersonContactNo" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="contactPersonEmailId">Contact Email</label>
+                            <input type="text" formControlName="contactPersonEmailId" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="totalEmpWorking">Total Employees</label>
+                            <input type="text" formControlName="totalEmpWorking" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="projectCost">Project Costing</label>
+                            <input type="text" formControlName="projectCost" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <label for="projectDetails">Project Description</label>
+                            <textarea formControlName="projectDetails" class="form-control"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label for="clientId">Client</label>
+                            <select formControlName="clientId" class="form-control">
+                                <option value="">Select Client</option>
+                                <option *ngFor="let item of clientList" [value]="item.clientId">{{ item.companyName }}</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="leadByEmpId">Lead By</label>
+                            <select formControlName="leadByEmpId" class="form-control">
+                                <option value="">Select Employee</option>
+                                <option *ngFor="let item of employeeList" [value]="item.empId">{{ item.empName }} - {{ item.empCode }}</option>
+                            </select>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-6 text-center">
+                                <button type="button" class="btn btn-success" (click)="OnSaveProject()">Save Project</button>
+                            </div>
+                            <div class="col-6 text-center">
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-success">
+                Client List - {{currentDate}}
+                <br>
+                {{firstName()}}
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Company Name</th>
+                                    <th>Person Name</th>
+                                    <th>Contact No</th>
+                                    <th>City</th>
+                                    <th>Pincode</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (item of clientList; track $index){
+                                    <tr>
+                                        <td>{{$index+1}}</td>
+                                        <td>{{item.companyName | uppercase}}</td>
+                                        <td>{{item.contactPersonName}}</td>
+                                        <td>{{item.contactNo}}</td>
+                                        <td>{{item.city}}</td>
+                                        <td>{{item.pincode}}</td>
+                                        <td>
+                                            <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+                                            <button class="btn btn-danger" (click)="onDelete(item.clientId)">Delete</button>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-success">
+                New Client
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Person Name</label>
+                        <input type="text" #personName="ngModel" required minlength="5" [(ngModel)] = "clientobj.contactPersonName" class="form-control">
+                        @if (personName.touched){
+                            <div class="text-danger">
+                                @if(personName?.errors?.['required']){
+                                    <span>Required</span>
+                                }
+                                @if(personName?.errors?.['minLength']){
+                                    <span>Min Char</span>
+                                }
+    
+                            </div>
+                        }
+                    </div>
+                    <div class="col-6">
+                        <label for="">Company Name</label>
+                        <input type="text" #companyName="ngModel" required [(ngModel)] = "clientobj.companyName" class="form-control">
+                        @if (companyName.touched){
+                            <div class="text-danger">
+                                @if(companyName?.errors?.['required']){
+                                    <span>Required</span>
+                                }
+    
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-6">
+                        <label for="">Address</label>
+                        <input type="text" [(ngModel)] = "clientobj.address" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">city</label>
+                        <input type="text" [(ngModel)] = "clientobj.city" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">pincode</label>
+                        <input type="text" [(ngModel)] = "clientobj.pincode" class="form-control">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="">State</label>
+                        <input type="text" [(ngModel)] = "clientobj.state" class="form-control">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="">Employee Strength</label>
+                        <input type="text" [(ngModel)] = "clientobj.employeeStrength" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">gst No</label>
+                        <input type="text" [(ngModel)] = "clientobj.gstNo" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">contact No</label>
+                        <input type="text" [(ngModel)] = "clientobj.contactNo" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Reistration No</label>
+                        <input type="text" [(ngModel)] = "clientobj.regNo" class="form-control">
+                    </div>
+                    <div class="row pt-2 ">
+                        <div class="col-6 text-center">
+                            <button class = 'btn btn-success' (click)="onSaveClient()">Save Client</button>
+                        </div>
+
+                        <div class="col-6 text-center ">
+                            <button class = 'btn btn-danger'>Reset</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
